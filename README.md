@@ -26,7 +26,7 @@ It uses RDAP (official registry protocol) for `.de`, `.net`, `.eu` and falls bac
 ## Quick Start
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/FlexKleks/DomainChecker.git
 cd domain-checker
 python -m venv .venv && source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
 pip install -r requirements.txt
