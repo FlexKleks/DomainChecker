@@ -1,0 +1,51 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.tmp
+*.log
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# -------------------------
+# Environment & Secrets
+# -------------------------
+.env
+.env.*
+!.env.example  # keep example env files
+
+# Local settings & state
+.notified.json
+
+# -------------------------
+# OS files
+# -------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# -------------------------
+# VS Code
+# -------------------------
+.vscode/
+.history/
+.gitignore
