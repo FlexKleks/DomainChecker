@@ -1,0 +1,13 @@
+# Domain Availability Checker - Domain List
+# One domain per line, lines starting with # are comments
+#
+# Supported TLDs: .de, .com, .net, .org, .eu, .at
+
+example.de
+example.com
+example.net
+example.org
+example.eu
+example.at
+
+# Add your domains below:

@@ -8,6 +8,10 @@ __pycache__/
 *.pdb
 *.tmp
 *.log
+*.egg-info/
+dist/
+build/
+.eggs/
 
 # Virtual environments
 .venv/
@@ -20,15 +24,31 @@ venv.bak/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
+# pytest
+.pytest_cache/
+.hypothesis/
+
 # -------------------------
 # Environment & Secrets
 # -------------------------
 .env
 .env.*
-!.env.example  # keep example env files
+!.env.example
 
-# Local settings & state
+# Configuration with secrets
+config.json
+!config.example.json
+
+# Domain lists (may contain sensitive info)
+domains.txt
+!domains.example.txt
+
+# -------------------------
+# Application State & Data
+# -------------------------
 .notified.json
+.domain_checker/
+state.json
 
 # -------------------------
 # OS files
@@ -44,8 +64,18 @@ ehthumbs.db
 Desktop.ini
 
 # -------------------------
-# VS Code
+# IDE & Editor
 # -------------------------
 .vscode/
+.idea/
 .history/
-.gitignore
+*.swp
+*.swo
+*~
+
+# -------------------------
+# Results & Logs
+# -------------------------
+results*.json
+logs/
+*.log

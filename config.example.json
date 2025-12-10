@@ -1,0 +1,95 @@
+{
+  "language": "de",
+  "simulation_mode": false,
+  "startup_self_test": true,
+  
+  "tlds": [
+    {
+      "tld": "de",
+      "rdap_endpoint": "https://rdap.denic.de/domain/",
+      "whois_server": "whois.denic.de",
+      "whois_enabled": true
+    },
+    {
+      "tld": "com",
+      "rdap_endpoint": "https://rdap.verisign.com/com/v1/domain/",
+      "whois_server": "whois.verisign-grs.com",
+      "whois_enabled": true
+    },
+    {
+      "tld": "net",
+      "rdap_endpoint": "https://rdap.verisign.com/net/v1/domain/",
+      "whois_server": "whois.verisign-grs.com",
+      "whois_enabled": true
+    },
+    {
+      "tld": "org",
+      "rdap_endpoint": "https://rdap.publicinterestregistry.org/rdap/domain/",
+      "whois_server": "whois.pir.org",
+      "whois_enabled": true
+    },
+    {
+      "tld": "eu",
+      "rdap_endpoint": "https://rdap.org/domain/",
+      "whois_server": "whois.eu",
+      "whois_enabled": true
+    },
+    {
+      "tld": "at",
+      "rdap_endpoint": "https://rdap.org/domain/",
+      "whois_server": "whois.nic.at",
+      "whois_enabled": true
+    }
+  ],
+  
+  "rate_limits": {
+    "global_limit": {
+      "max_requests": 10,
+      "window_seconds": 60.0,
+      "min_delay_seconds": 2.0
+    }
+  },
+  
+  "retry": {
+    "max_retries": 3,
+    "base_delay_seconds": 1.0,
+    "max_delay_seconds": 60.0
+  },
+  
+  "persistence": {
+    "state_file_path": ".domain_checker/state.json",
+    "hmac_secret": "CHANGE-THIS-SECRET-KEY"
+  },
+  
+  "logging": {
+    "level": "info",
+    "audit_mode": false,
+    "output_format": "text"
+  },
+  
+  "notifications": {
+    "telegram": {
+      "enabled": false,
+      "bot_token": "YOUR_BOT_TOKEN_HERE",
+      "chat_id": "YOUR_CHAT_ID_HERE"
+    },
+    "discord": {
+      "enabled": false,
+      "webhook_url": "YOUR_DISCORD_WEBHOOK_URL"
+    },
+    "email": {
+      "enabled": false,
+      "smtp_host": "smtp.example.com",
+      "smtp_port": 587,
+      "username": "your-email@example.com",
+      "password": "YOUR_EMAIL_PASSWORD",
+      "from_address": "your-email@example.com",
+      "to_addresses": ["recipient@example.com"]
+    },
+    "webhook": {
+      "enabled": false,
+      "url": "https://your-webhook-endpoint.com/notify",
+      "headers": {}
+    }
+  }
+}
