@@ -18,7 +18,7 @@ from urllib.parse import urlparse
 import httpx
 
 from .config import SystemConfig, TLDConfig
-from .enums import LogLevel
+
 from .i18n import get_message
 
 

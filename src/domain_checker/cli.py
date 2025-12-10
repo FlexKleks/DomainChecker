@@ -34,7 +34,7 @@ from .config import (
     TLDConfig,
     WebhookConfig,
 )
-from .enums import AvailabilityStatus, LogLevel
+from .enums import AvailabilityStatus
 from .i18n import get_message
 from .notifications import (
     DiscordChannel,
@@ -44,7 +44,7 @@ from .notifications import (
     WebhookChannel,
 )
 from .orchestrator import CheckOrchestrator
-from .self_test import SelfTest, run_self_test
+from .self_test import run_self_test
 from .state_store import StateStore
 
 

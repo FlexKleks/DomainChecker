@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from .enums import WHOISErrorCode, WHOISStatus
-from .exceptions import NetworkError
+
 
 
 @dataclass

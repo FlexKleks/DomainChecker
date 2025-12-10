@@ -20,7 +20,7 @@ import time
 import httpx
 
 from .enums import RDAPErrorCode, RDAPStatus
-from .exceptions import NetworkError, ProtocolError
+from .exceptions import NetworkError
 
 
 @dataclass

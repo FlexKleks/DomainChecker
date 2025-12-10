@@ -11,13 +11,17 @@ Requirements covered:
 - 5.4: Allow customization of retry count and wait times
 """
 
+from __future__ import annotations
+
 import asyncio
 from dataclasses import dataclass
-from typing import Awaitable, Callable, Generic, Optional, TypeVar
+from typing import TYPE_CHECKING, Awaitable, Callable, Generic, Optional, TypeVar
 
 from .config import RetryConfig
 from .enums import RDAPErrorCode, RDAPStatus
-from .rdap_client import RDAPResponse
+
+if TYPE_CHECKING:
+    from .rdap_client import RDAPResponse
 
 T = TypeVar("T")
 

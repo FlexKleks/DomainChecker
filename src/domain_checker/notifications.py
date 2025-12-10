@@ -13,17 +13,19 @@ Requirements covered:
 """
 
 import asyncio
-import json
 import smtplib
 import ssl
 from abc import abstractmethod
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from typing import Optional, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Optional, Protocol, runtime_checkable
 
 import httpx
+
+if TYPE_CHECKING:
+    from .audit_logger import AuditLogger
 
 from .config import (
     DiscordConfig,
@@ -33,7 +35,7 @@ from .config import (
     WebhookConfig,
 )
 from .enums import AvailabilityStatus, LogLevel
-from .exceptions import NotificationError
+
 from .models import DomainState
 
 
@@ -687,8 +689,4 @@ class NotificationRouter:
         )
 
 
-# Type hint for circular import avoidance
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from .audit_logger import AuditLogger
