@@ -327,7 +327,13 @@ Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
 
 If this project helped you, please consider giving it a ⭐!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=FlexKleks/DomainChecker&type=Date)](https://star-history.com/#FlexKleks/DomainChecker&Date)
+<a href="https://www.star-history.com/#FlexKleks/DomainChecker&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=FlexKleks/DomainChecker&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=FlexKleks/DomainChecker&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=FlexKleks/DomainChecker&type=date&legend=top-left" />
+  </picture>
+</a>
 
 ---
 
