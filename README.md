@@ -165,6 +165,110 @@ python -m domain_checker.cli check-list domains.txt --config config.json
 0 */6 * * * cd /path/to/DomainChecker && python -m domain_checker.cli check-list domains.txt --config config.json
 ```
 
+### Systemd Service (Linux)
+
+<details>
+<summary><b>Click to expand systemd setup</b></summary>
+
+1. Create service file `/etc/systemd/system/domain-checker.service`:
+```ini
+[Unit]
+Description=Domain Availability Checker
+After=network.target
+
+[Service]
+Type=oneshot
+User=your-user
+WorkingDirectory=/path/to/DomainChecker
+ExecStart=/usr/bin/python3 -m domain_checker.cli check-list domains.txt --config config.json
+```
+
+2. Create timer file `/etc/systemd/system/domain-checker.timer`:
+```ini
+[Unit]
+Description=Run Domain Checker every 6 hours
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=6h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+3. Enable and start:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable domain-checker.timer
+sudo systemctl start domain-checker.timer
+```
+
+</details>
+
+### Pelican Panel / Pterodactyl
+
+<details>
+<summary><b>Click to expand Pelican Panel setup</b></summary>
+
+#### Option 1: Using Startup Command
+
+1. Create a new server with a **Python** egg
+2. Set the startup command:
+```bash
+cd /home/container && pip install -e . && python -m domain_checker.cli check-list domains.txt --config config.json
+```
+
+#### Option 2: Using a Startup Script
+
+1. Create `start.sh` in your server files:
+```bash
+#!/bin/bash
+cd /home/container
+
+# Install dependencies (first run only)
+if [ ! -d "venv" ]; then
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -e .
+else
+    source venv/bin/activate
+fi
+
+# Run the checker in a loop
+while true; do
+    echo "[$(date)] Starting domain check..."
+    python -m domain_checker.cli check-list domains.txt --config config.json
+    echo "[$(date)] Check complete. Sleeping for 6 hours..."
+    sleep 21600  # 6 hours in seconds
+done
+```
+
+2. Set startup command to: `bash start.sh`
+
+#### Option 3: Using Schedule Feature
+
+If your panel supports schedules:
+1. Go to **Schedules** in your server panel
+2. Create a new schedule (e.g., every 6 hours)
+3. Add a task with command:
+```bash
+python -m domain_checker.cli check-list domains.txt --config config.json
+```
+
+#### File Structure for Pelican
+```
+/home/container/
+├── config.json          # Your configuration
+├── domains.txt          # Domains to monitor
+├── start.sh             # Startup script (optional)
+├── src/
+│   └── domain_checker/  # Application code
+└── .domain_checker/     # State files (auto-created)
+```
+
+</details>
+
 ### Docker (Coming Soon)
 ```bash
 docker run -v ./config.json:/app/config.json flexkleks/domain-checker
@@ -172,7 +276,9 @@ docker run -v ./config.json:/app/config.json flexkleks/domain-checker
 
 ---
 
-## 🌐 Supported TLDs (190+)
+## 🌐 Supported TLDs (193)
+
+> 📋 See [SUPPORTED_TLDS.md](SUPPORTED_TLDS.md) for the complete list with RDAP/WHOIS endpoints.
 
 <details>
 <summary><b>Click to expand full list</b></summary>

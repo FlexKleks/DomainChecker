@@ -4,15 +4,24 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "domain-checker"
-version = "0.1.0"
-description = "High-security multi-TLD domain availability checker"
+version = "0.2.0"
+description = "High-security multi-TLD domain availability checker with 193 TLDs support"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [
-    {name = "Domain Checker Team"}
+    {name = "Jonas (FlexKleks)", email = "info@flex.pm"}
 ]
-keywords = ["domain", "availability", "rdap", "whois", "checker"]
+maintainers = [
+    {name = "Jonas (FlexKleks)", email = "info@flex.pm"}
+]
+keywords = ["domain", "availability", "rdap", "whois", "checker", "telegram", "discord", "notifications"]
+
+[project.urls]
+Homepage = "https://github.com/FlexKleks/DomainChecker"
+Repository = "https://github.com/FlexKleks/DomainChecker"
+Issues = "https://github.com/FlexKleks/DomainChecker/issues"
+Discord = "https://discord.com/users/flexkleks"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
