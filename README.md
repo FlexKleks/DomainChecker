@@ -172,20 +172,29 @@ docker run -v ./config.json:/app/config.json flexkleks/domain-checker
 
 ---
 
-## 🌐 Supported TLDs (38+)
+## 🌐 Supported TLDs (190+)
 
 <details>
 <summary><b>Click to expand full list</b></summary>
 
 | Category | TLDs |
 |----------|------|
-| **Generic** | `.com`, `.net`, `.org`, `.info`, `.biz`, `.xyz` |
-| **Tech** | `.io`, `.co`, `.app`, `.dev`, `.tech`, `.online`, `.site` |
-| **Europe** | `.de`, `.eu`, `.at`, `.ch`, `.nl`, `.be`, `.fr`, `.it`, `.es`, `.pl`, `.se`, `.dk`, `.no`, `.fi` |
-| **UK** | `.uk`, `.co.uk` |
-| **Americas** | `.us`, `.ca`, `.mx`, `.br` |
-| **Asia/Pacific** | `.au`, `.nz`, `.jp`, `.in` |
-| **Other** | `.ru` |
+| **Generic** | `.com`, `.net`, `.org`, `.info`, `.biz`, `.name`, `.mobi`, `.pro` |
+| **Tech** | `.io`, `.co`, `.app`, `.dev`, `.ai`, `.tech`, `.cloud`, `.digital`, `.software`, `.systems`, `.network`, `.solutions`, `.agency`, `.studio`, `.design`, `.media` |
+| **Popular New** | `.xyz`, `.online`, `.site`, `.store`, `.shop`, `.club`, `.live`, `.life`, `.world`, `.today`, `.space`, `.fun`, `.top`, `.vip`, `.one`, `.blog`, `.news`, `.email`, `.link`, `.click` |
+| **Europe** | `.de`, `.eu`, `.at`, `.ch`, `.li`, `.nl`, `.be`, `.fr`, `.it`, `.es`, `.pt`, `.pl`, `.cz`, `.sk`, `.hu`, `.ro`, `.bg`, `.hr`, `.si`, `.rs`, `.gr`, `.tr` |
+| **Nordic** | `.se`, `.dk`, `.no`, `.fi`, `.is` |
+| **UK & Ireland** | `.uk`, `.co.uk`, `.org.uk`, `.me.uk`, `.ie` |
+| **Americas** | `.us`, `.ca`, `.mx`, `.br`, `.ar`, `.cl`, `.co`, `.pe` |
+| **Asia Pacific** | `.au`, `.com.au`, `.nz`, `.jp`, `.cn`, `.hk`, `.tw`, `.kr`, `.in`, `.sg`, `.my`, `.th`, `.id`, `.ph`, `.vn` |
+| **Middle East & Africa** | `.ae`, `.sa`, `.il`, `.za`, `.ng`, `.ke`, `.eg`, `.ma` |
+| **CIS** | `.ru`, `.ua`, `.by`, `.kz`, `.uz` |
+| **Special** | `.me`, `.tv`, `.cc`, `.ws`, `.fm`, `.gg`, `.to`, `.la`, `.ly`, `.vc`, `.gl`, `.im`, `.sh`, `.ac` |
+| **Business** | `.company`, `.business`, `.consulting`, `.services`, `.group`, `.team`, `.work`, `.jobs`, `.careers`, `.finance`, `.money`, `.capital`, `.ventures`, `.holdings`, `.partners`, `.legal`, `.law`, `.tax`, `.accountant`, `.insurance` |
+| **Lifestyle** | `.art`, `.music`, `.video`, `.photo`, `.photography`, `.gallery`, `.fashion`, `.style`, `.fitness`, `.health`, `.yoga`, `.travel`, `.holiday`, `.restaurant`, `.cafe`, `.bar`, `.beer`, `.wine`, `.pizza`, `.game`, `.games`, `.casino`, `.bet` |
+| **Real Estate** | `.house`, `.homes`, `.property`, `.properties`, `.land`, `.estate`, `.apartments`, `.rent` |
+| **Education** | `.edu`, `.academy`, `.school`, `.university`, `.college`, `.training`, `.courses`, `.community`, `.social`, `.chat`, `.forum` |
+| **Google** | `.page`, `.new`, `.how`, `.soy`, `.foo` |
 
 </details>
 
