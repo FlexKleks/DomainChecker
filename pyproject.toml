@@ -16,12 +16,6 @@ maintainers = [
     {name = "Jonas (FlexKleks)", email = "info@flex.pm"}
 ]
 keywords = ["domain", "availability", "rdap", "whois", "checker", "telegram", "discord", "notifications"]
-
-[project.urls]
-Homepage = "https://github.com/FlexKleks/DomainChecker"
-Repository = "https://github.com/FlexKleks/DomainChecker"
-Issues = "https://github.com/FlexKleks/DomainChecker/issues"
-Discord = "https://discord.com/users/flexkleks"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -30,11 +24,15 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-
 dependencies = [
     "httpx>=0.25.0",
     "idna>=3.4",
 ]
+
+[project.urls]
+Homepage = "https://github.com/FlexKleks/DomainChecker"
+Repository = "https://github.com/FlexKleks/DomainChecker"
+Issues = "https://github.com/FlexKleks/DomainChecker/issues"
 
 [project.optional-dependencies]
 dev = [
