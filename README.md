@@ -3,28 +3,50 @@
 [![Tests](https://github.com/FlexKleks/DomainChecker/actions/workflows/test.yml/badge.svg)](https://github.com/FlexKleks/DomainChecker/actions/workflows/test.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/FlexKleks/DomainChecker?style=social)](https://github.com/FlexKleks/DomainChecker/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/FlexKleks/DomainChecker?style=social)](https://github.com/FlexKleks/DomainChecker/network/members)
 
-A high-security Python tool to monitor **domain name availability** for multiple TLDs with notifications via **Telegram**, **Discord**, **Email**, or **Webhooks**.
+> 🔔 **Get notified instantly when your dream domain becomes available!**
 
-Uses **official RDAP endpoints** with **WHOIS fallback** and two-source consensus to minimize false positives.
+A powerful Python CLI tool that monitors domain availability across multiple TLDs and sends real-time alerts via **Telegram**, **Discord**, **Email**, or **Webhooks**.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Telegram-Notifications-blue?logo=telegram" alt="Telegram">
+  <img src="https://img.shields.io/badge/Discord-Webhooks-5865F2?logo=discord&logoColor=white" alt="Discord">
+  <img src="https://img.shields.io/badge/Email-SMTP-red?logo=gmail" alt="Email">
+  <img src="https://img.shields.io/badge/Webhooks-Custom-green" alt="Webhooks">
+</p>
+
+---
+
+## 🎯 Why Use This?
+
+- **Never miss a domain drop** - Get instant notifications when domains become available
+- **No false positives** - Two-source verification (RDAP + WHOIS) ensures accuracy
+- **Multiple alert channels** - Telegram, Discord, Email, or custom webhooks
+- **Set it and forget it** - Run on a schedule and get notified automatically
+- **Privacy-focused** - Self-hosted, your data stays with you
 
 ---
 
 ## ✨ Features
 
-- **Multi-TLD Support**: `.de`, `.com`, `.net`, `.org`, `.eu`, `.at`
-- **Authoritative RDAP**: Queries official registry endpoints (DENIC, Verisign, etc.)
-- **False-Positive Protection**: Two-source consensus required for availability confirmation
-- **Multiple Notification Channels**: Telegram, Discord, Email, Webhooks
-- **No Spam**: Each domain triggers an alert only once (state persistence)
-- **Rate Limiting**: Configurable delays to avoid registry rate limits
-- **Retry Logic**: Exponential backoff for transient errors
-- **Multilingual**: German 🇩🇪 / English 🇬🇧 output and notifications
-- **Simulation Mode**: Test without real network requests
+| Feature | Description |
+|---------|-------------|
+| 🌐 **Multi-TLD** | `.de`, `.com`, `.net`, `.org`, `.eu`, `.at` |
+| 🔍 **RDAP + WHOIS** | Official registry queries with fallback |
+| 📱 **Telegram** | Instant mobile notifications |
+| 💬 **Discord** | Webhook integration for servers |
+| 📧 **Email** | SMTP support for email alerts |
+| 🔗 **Webhooks** | Custom HTTP endpoints |
+| 🚫 **No Spam** | Smart deduplication - alert only once per domain |
+| ⏱️ **Rate Limiting** | Respects registry limits automatically |
+| 🔄 **Retry Logic** | Handles transient errors gracefully |
+| 🌍 **Multilingual** | German 🇩🇪 & English 🇬🇧 |
 
 ---
 
-## 📦 Installation
+## 📦 Quick Install
 
 ```bash
 git clone https://github.com/FlexKleks/DomainChecker.git
@@ -36,47 +58,43 @@ pip install -e .
 
 ## 🚀 Quick Start
 
-### 1. Setup Configuration
+### 1️⃣ Configure
 
 ```bash
 cp config.example.json config.json
-# Edit config.json with your settings (Telegram token, etc.)
+# Edit config.json - add your Telegram token, domains, etc.
 ```
 
-### 2. Add Domains to Monitor
+### 2️⃣ Add Domains
 
 ```bash
 cp domains.example.txt domains.txt
-# Edit domains.txt - one domain per line
+# Add domains to monitor (one per line)
 ```
 
-### 3. Run the Checker
+### 3️⃣ Run
 
 ```bash
-# Using Python module (recommended)
 python -m domain_checker.cli check-list domains.txt --config config.json
-
-# Or if installed in PATH
-domain-checker check-list domains.txt --config config.json
 ```
 
-### 4. Check a Single Domain
+### 📱 Example Telegram Notification
 
-```bash
-python -m domain_checker.cli check example.de --config config.json
+```
+🟢 Domain available!
+
+Domain: mydream-domain.com
+Status: Available
+Time: Dec 10, 2025, 5:30 AM
 ```
 
 ---
 
 ## ⚙️ Configuration
 
-Copy `config.example.json` to `config.json` and customize:
-
 ```json
 {
   "language": "en",
-  "simulation_mode": false,
-  
   "notifications": {
     "telegram": {
       "enabled": true,
@@ -87,160 +105,111 @@ Copy `config.example.json` to `config.json` and customize:
 }
 ```
 
-### Notification Channels
+<details>
+<summary>📲 <b>Telegram Setup Guide</b></summary>
 
-| Channel | Required Fields |
-|---------|-----------------|
-| Telegram | `bot_token`, `chat_id` |
-| Discord | `webhook_url` |
-| Email | `smtp_host`, `smtp_port`, `username`, `password`, `from_address`, `to_addresses` |
-| Webhook | `url`, optional `headers` |
+1. Message [@BotFather](https://t.me/BotFather) → `/newbot`
+2. Save the bot token
+3. Start a chat with your bot, send any message
+4. Get chat ID: `https://api.telegram.org/bot<TOKEN>/getUpdates`
+5. Add both to your `config.json`
 
----
+</details>
 
-## 📲 Telegram Setup
+<details>
+<summary>💬 <b>Discord Setup Guide</b></summary>
 
-1. Message [@BotFather](https://t.me/BotFather) → `/newbot` → Save the token
-2. Start a chat with your bot, send any message
-3. Get your chat ID: `https://api.telegram.org/bot<TOKEN>/getUpdates`
-4. Add to config:
-   ```json
-   "telegram": {
-     "enabled": true,
-     "bot_token": "123456789:ABCdef...",
-     "chat_id": "123456789"
-   }
-   ```
-
----
-
-## 🔍 How It Works
-
-1. Query **authoritative RDAP** for each TLD
-2. If RDAP returns **404** → Domain potentially available
-3. Confirm with **secondary source** (WHOIS)
-4. Only if **both agree** → Report as **AVAILABLE**
-5. Send notification (only on first detection)
-
-### Notification Example
-
-```
-🟢 Domain available!
-
-Domain: example.de
-Status: Available
-Time: Dec 10, 2025, 5:30 AM
+1. Server Settings → Integrations → Webhooks
+2. Create Webhook → Copy URL
+3. Add to config:
+```json
+"discord": {
+  "enabled": true,
+  "webhook_url": "https://discord.com/api/webhooks/..."
+}
 ```
 
+</details>
+
 ---
 
-## 🛠️ CLI Reference
+## 🛠️ CLI Commands
 
-| Command | Description |
-|---------|-------------|
-| `check <domain>` | Check single domain |
-| `check-list <file>` | Check multiple domains |
-| `config init` | Create default config |
-| `config show` | Display config |
-| `self-test` | Test connectivity |
+```bash
+# Check single domain
+python -m domain_checker.cli check example.com --config config.json
 
-### Options
+# Check multiple domains
+python -m domain_checker.cli check-list domains.txt --config config.json
 
-| Option | Description |
-|--------|-------------|
-| `-c, --config` | Config file path |
-| `-l, --language` | Output language (`de`/`en`) |
-| `-v, --verbose` | Verbose output |
-| `--dry-run` | Simulation mode |
-| `-o, --output` | JSON output file |
+# Test mode (no real requests)
+python -m domain_checker.cli check example.com --dry-run
+
+# Verify connectivity
+python -m domain_checker.cli self-test --config config.json
+```
+
+---
+
+## 🔄 Automated Monitoring
+
+### Windows Task Scheduler
+```powershell
+# Create scheduled task to run every 6 hours
+python -m domain_checker.cli check-list domains.txt --config config.json
+```
+
+### Linux Cron
+```bash
+# Every 6 hours
+0 */6 * * * cd /path/to/DomainChecker && python -m domain_checker.cli check-list domains.txt --config config.json
+```
+
+### Docker (Coming Soon)
+```bash
+docker run -v ./config.json:/app/config.json flexkleks/domain-checker
+```
 
 ---
 
 ## 🌐 Supported TLDs
 
-| TLD | Registry | RDAP Endpoint |
-|-----|----------|---------------|
-| `.de` | DENIC | rdap.denic.de |
-| `.com` | Verisign | rdap.verisign.com |
-| `.net` | Verisign | rdap.verisign.com |
-| `.org` | PIR | rdap.publicinterestregistry.org |
-| `.eu` | EURid | rdap.org (fallback) |
-| `.at` | nic.at | rdap.org (fallback) |
-
----
-
-## 🔄 Scheduled Execution
-
-### Windows Task Scheduler
-
-Create a scheduled task to run periodically:
-
-```powershell
-# Run every 6 hours
-python -m domain_checker.cli check-list domains.txt --config config.json
-```
-
-### Linux Cron
-
-```bash
-# Add to crontab (every 6 hours)
-0 */6 * * * cd /path/to/DomainChecker && python -m domain_checker.cli check-list domains.txt --config config.json
-```
-
----
-
-## 🧪 Development
-
-```bash
-# Install dev dependencies
-pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Run with verbose output
-pytest -v --tb=short
-```
-
----
-
-## 📁 Project Structure
-
-```
-DomainChecker/
-├── src/domain_checker/
-│   ├── cli.py              # CLI interface
-│   ├── orchestrator.py     # Main coordination
-│   ├── rdap_client.py      # RDAP client
-│   ├── whois_client.py     # WHOIS client
-│   ├── notifications.py    # Alert channels
-│   ├── decision_engine.py  # Availability logic
-│   ├── rate_limiter.py     # Request throttling
-│   └── state_store.py      # Persistence
-├── tests/
-├── config.example.json
-├── domains.example.txt
-├── pyproject.toml
-└── README.md
-```
-
----
-
-## 📄 License
-
-[MIT License](LICENSE) - see LICENSE file for details.
+| TLD | Registry | Status |
+|-----|----------|--------|
+| `.com` | Verisign | ✅ Full RDAP |
+| `.net` | Verisign | ✅ Full RDAP |
+| `.org` | PIR | ✅ Full RDAP |
+| `.de` | DENIC | ✅ Full RDAP |
+| `.eu` | EURid | ✅ WHOIS + Fallback |
+| `.at` | nic.at | ✅ WHOIS + Fallback |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+- ⭐ **Star this repo** if you find it useful!
+- 🐛 **Report bugs** via [Issues](https://github.com/FlexKleks/DomainChecker/issues)
+- 💡 **Request features** via [Issues](https://github.com/FlexKleks/DomainChecker/issues)
+- 🔀 **Submit PRs** for improvements
 
 ---
 
-## 💡 Tips
+## 📄 License
 
-- Reset notifications: Delete `.domain_checker/` folder
-- Test setup: Use `--dry-run` flag
-- Many domains: Increase `min_delay_seconds` in config
-- Verify connectivity: Run `self-test` command
+[MIT License](LICENSE) - Free for personal and commercial use.
+
+---
+
+## ⭐ Star History
+
+If this project helped you, please consider giving it a ⭐!
+
+[![Star History Chart](https://api.star-history.com/svg?repos=FlexKleks/DomainChecker&type=Date)](https://star-history.com/#FlexKleks/DomainChecker&Date)
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/FlexKleks">FlexKleks</a>
+</p>
