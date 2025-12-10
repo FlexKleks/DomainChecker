@@ -1,47 +1,49 @@
 {
-  "language": "de",
+  "language": "en",
   "simulation_mode": false,
-  "startup_self_test": true,
-  
+  "startup_self_test": false,
+
   "tlds": [
-    {
-      "tld": "de",
-      "rdap_endpoint": "https://rdap.denic.de/domain/",
-      "whois_server": "whois.denic.de",
-      "whois_enabled": true
-    },
-    {
-      "tld": "com",
-      "rdap_endpoint": "https://rdap.verisign.com/com/v1/domain/",
-      "whois_server": "whois.verisign-grs.com",
-      "whois_enabled": true
-    },
-    {
-      "tld": "net",
-      "rdap_endpoint": "https://rdap.verisign.com/net/v1/domain/",
-      "whois_server": "whois.verisign-grs.com",
-      "whois_enabled": true
-    },
-    {
-      "tld": "org",
-      "rdap_endpoint": "https://rdap.publicinterestregistry.org/rdap/domain/",
-      "whois_server": "whois.pir.org",
-      "whois_enabled": true
-    },
-    {
-      "tld": "eu",
-      "rdap_endpoint": "https://rdap.org/domain/",
-      "whois_server": "whois.eu",
-      "whois_enabled": true
-    },
-    {
-      "tld": "at",
-      "rdap_endpoint": "https://rdap.org/domain/",
-      "whois_server": "whois.nic.at",
-      "whois_enabled": true
-    }
+    {"tld": "de", "rdap_endpoint": "https://rdap.denic.de/domain/", "whois_server": "whois.denic.de", "whois_enabled": true},
+    {"tld": "com", "rdap_endpoint": "https://rdap.verisign.com/com/v1/domain/", "whois_server": "whois.verisign-grs.com", "whois_enabled": true},
+    {"tld": "net", "rdap_endpoint": "https://rdap.verisign.com/net/v1/domain/", "whois_server": "whois.verisign-grs.com", "whois_enabled": true},
+    {"tld": "org", "rdap_endpoint": "https://rdap.publicinterestregistry.org/rdap/domain/", "whois_server": "whois.pir.org", "whois_enabled": true},
+    {"tld": "info", "rdap_endpoint": "https://rdap.afilias.net/rdap/info/domain/", "whois_server": "whois.afilias.net", "whois_enabled": true},
+    {"tld": "biz", "rdap_endpoint": "https://rdap.nic.biz/domain/", "whois_server": "whois.nic.biz", "whois_enabled": true},
+    {"tld": "io", "rdap_endpoint": "https://rdap.nic.io/domain/", "whois_server": "whois.nic.io", "whois_enabled": true},
+    {"tld": "co", "rdap_endpoint": "https://rdap.nic.co/domain/", "whois_server": "whois.nic.co", "whois_enabled": true},
+    {"tld": "app", "rdap_endpoint": "https://rdap.nic.google/domain/", "whois_server": "whois.nic.google", "whois_enabled": true},
+    {"tld": "dev", "rdap_endpoint": "https://rdap.nic.google/domain/", "whois_server": "whois.nic.google", "whois_enabled": true},
+    {"tld": "xyz", "rdap_endpoint": "https://rdap.nic.xyz/domain/", "whois_server": "whois.nic.xyz", "whois_enabled": true},
+    {"tld": "online", "rdap_endpoint": "https://rdap.centralnic.com/online/domain/", "whois_server": "whois.centralnic.com", "whois_enabled": true},
+    {"tld": "site", "rdap_endpoint": "https://rdap.centralnic.com/site/domain/", "whois_server": "whois.centralnic.com", "whois_enabled": true},
+    {"tld": "tech", "rdap_endpoint": "https://rdap.centralnic.com/tech/domain/", "whois_server": "whois.centralnic.com", "whois_enabled": true},
+    {"tld": "eu", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.eu", "whois_enabled": true},
+    {"tld": "at", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.nic.at", "whois_enabled": true},
+    {"tld": "ch", "rdap_endpoint": "https://rdap.nic.ch/domain/", "whois_server": "whois.nic.ch", "whois_enabled": true},
+    {"tld": "nl", "rdap_endpoint": "https://rdap.sidn.nl/domain/", "whois_server": "whois.sidn.nl", "whois_enabled": true},
+    {"tld": "be", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.dns.be", "whois_enabled": true},
+    {"tld": "fr", "rdap_endpoint": "https://rdap.nic.fr/domain/", "whois_server": "whois.nic.fr", "whois_enabled": true},
+    {"tld": "it", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.nic.it", "whois_enabled": true},
+    {"tld": "es", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.nic.es", "whois_enabled": true},
+    {"tld": "pl", "rdap_endpoint": "https://rdap.dns.pl/domain/", "whois_server": "whois.dns.pl", "whois_enabled": true},
+    {"tld": "se", "rdap_endpoint": "https://rdap.iis.se/domain/", "whois_server": "whois.iis.se", "whois_enabled": true},
+    {"tld": "dk", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.dk-hostmaster.dk", "whois_enabled": true},
+    {"tld": "no", "rdap_endpoint": "https://rdap.norid.no/domain/", "whois_server": "whois.norid.no", "whois_enabled": true},
+    {"tld": "fi", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.fi", "whois_enabled": true},
+    {"tld": "uk", "rdap_endpoint": "https://rdap.nominet.uk/uk/domain/", "whois_server": "whois.nic.uk", "whois_enabled": true},
+    {"tld": "co.uk", "rdap_endpoint": "https://rdap.nominet.uk/uk/domain/", "whois_server": "whois.nic.uk", "whois_enabled": true},
+    {"tld": "us", "rdap_endpoint": "https://rdap.nic.us/domain/", "whois_server": "whois.nic.us", "whois_enabled": true},
+    {"tld": "ca", "rdap_endpoint": "https://rdap.ca.fury.ca/rdap/domain/", "whois_server": "whois.cira.ca", "whois_enabled": true},
+    {"tld": "au", "rdap_endpoint": "https://rdap.auda.org.au/domain/", "whois_server": "whois.auda.org.au", "whois_enabled": true},
+    {"tld": "nz", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.srs.net.nz", "whois_enabled": true},
+    {"tld": "jp", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.jprs.jp", "whois_enabled": true},
+    {"tld": "in", "rdap_endpoint": "https://rdap.registry.in/domain/", "whois_server": "whois.registry.in", "whois_enabled": true},
+    {"tld": "ru", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.tcinet.ru", "whois_enabled": true},
+    {"tld": "br", "rdap_endpoint": "https://rdap.registro.br/domain/", "whois_server": "whois.registro.br", "whois_enabled": true},
+    {"tld": "mx", "rdap_endpoint": "https://rdap.org/domain/", "whois_server": "whois.mx", "whois_enabled": true}
   ],
-  
+
   "rate_limits": {
     "global_limit": {
       "max_requests": 10,
@@ -49,24 +51,24 @@
       "min_delay_seconds": 2.0
     }
   },
-  
+
   "retry": {
     "max_retries": 3,
     "base_delay_seconds": 1.0,
     "max_delay_seconds": 60.0
   },
-  
+
   "persistence": {
     "state_file_path": ".domain_checker/state.json",
     "hmac_secret": "CHANGE-THIS-SECRET-KEY"
   },
-  
+
   "logging": {
     "level": "info",
     "audit_mode": false,
     "output_format": "text"
   },
-  
+
   "notifications": {
     "telegram": {
       "enabled": false,

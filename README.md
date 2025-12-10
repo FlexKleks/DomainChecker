@@ -172,16 +172,22 @@ docker run -v ./config.json:/app/config.json flexkleks/domain-checker
 
 ---
 
-## 🌐 Supported TLDs
+## 🌐 Supported TLDs (38+)
 
-| TLD | Registry | Status |
-|-----|----------|--------|
-| `.com` | Verisign | ✅ Full RDAP |
-| `.net` | Verisign | ✅ Full RDAP |
-| `.org` | PIR | ✅ Full RDAP |
-| `.de` | DENIC | ✅ Full RDAP |
-| `.eu` | EURid | ✅ WHOIS + Fallback |
-| `.at` | nic.at | ✅ WHOIS + Fallback |
+<details>
+<summary><b>Click to expand full list</b></summary>
+
+| Category | TLDs |
+|----------|------|
+| **Generic** | `.com`, `.net`, `.org`, `.info`, `.biz`, `.xyz` |
+| **Tech** | `.io`, `.co`, `.app`, `.dev`, `.tech`, `.online`, `.site` |
+| **Europe** | `.de`, `.eu`, `.at`, `.ch`, `.nl`, `.be`, `.fr`, `.it`, `.es`, `.pl`, `.se`, `.dk`, `.no`, `.fi` |
+| **UK** | `.uk`, `.co.uk` |
+| **Americas** | `.us`, `.ca`, `.mx`, `.br` |
+| **Asia/Pacific** | `.au`, `.nz`, `.jp`, `.in` |
+| **Other** | `.ru` |
+
+</details>
 
 ---
 
