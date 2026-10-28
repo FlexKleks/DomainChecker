@@ -171,8 +171,24 @@ class DecisionEngine:
         - Errors occurred but conservative decision made
         """
         if status == AvailabilityStatus.TAKEN:
-            # TAKEN is always high confidence (conservative approach)
-            return Confidence.HIGH
+            # TAKEN is also the conservative fallback for errors, timeouts and
+            # missing confirmation. Reporting all of those as HIGH confidence
+            # hid genuine failures behind a seemingly definitive result, so
+            # HIGH is only used when a source actually proved the registration.
+            if primary_result is not None and primary_result.status == RDAPStatus.FOUND:
+                return Confidence.HIGH
+
+            if (
+                secondary_result is not None
+                and secondary_result.status == RDAPStatus.FOUND
+            ):
+                return Confidence.HIGH
+
+            if whois_result is not None and whois_result.status == WHOISStatus.FOUND:
+                return Confidence.HIGH
+
+            # No positive registration signal -> the result is uncertain
+            return Confidence.LOW
 
         if status == AvailabilityStatus.UNKNOWN:
             return Confidence.LOW

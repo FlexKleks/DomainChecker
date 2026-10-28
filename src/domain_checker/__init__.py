@@ -5,7 +5,7 @@ This package provides a secure, modular system for checking domain availability
 across multiple TLDs using RDAP and WHOIS protocols with conservative decision logic.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.1"
 __author__ = "Domain Checker Team"
 
 from domain_checker.exceptions import (
