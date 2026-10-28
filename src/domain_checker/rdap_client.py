@@ -253,7 +253,7 @@ class RDAPClient:
         """
         try:
             data = json.loads(body)
-        except Exception:
+        except (json.JSONDecodeError, TypeError):
             return None
 
         if not isinstance(data, dict):
