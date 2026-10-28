@@ -47,6 +47,21 @@ domain-checker = "domain_checker.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+# The rule set is pinned explicitly on purpose.
+#
+# Without a `select`, ruff applies its own implicit defaults, and those
+# defaults expand between releases. Combined with an unpinned `pip install
+# ruff` in CI, that turned the lint job red without a single line of code
+# changing: ruff 0.8.6 reported no findings for src/, ruff 0.17.3 reported 170.
+#
+# These are the rules the project was developed and kept green against:
+# pyflakes plus the pycodestyle error subsets.
+select = ["E4", "E7", "E9", "F"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
