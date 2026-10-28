@@ -14,7 +14,8 @@ Requirements covered:
 
 from dataclasses import dataclass
 from typing import Any, Optional
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse, urlunparse
+import json
 import time
 
 import httpx
@@ -83,6 +84,9 @@ class RDAPClient:
         "domain not found",
     ]
 
+    # Path segment RDAP uses for domain lookups (RFC 7482, Section 3.1.3)
+    DOMAIN_PATH_SEGMENT = "domain"
+
     def __init__(
         self,
         tld_endpoints: dict[str, str],
@@ -149,6 +153,38 @@ class RDAPClient:
                 details={"endpoint": endpoint, "scheme": parsed.scheme},
             )
 
+    @classmethod
+    def _build_query_url(cls, endpoint: str, domain: str) -> str:
+        """
+        Build the RDAP domain lookup URL for a configured endpoint.
+
+        Endpoints are configured inconsistently: most already contain the
+        RDAP ``/domain`` path segment (e.g.
+        ``https://rdap.verisign.com/com/v1/domain/``), while others only point
+        at the RDAP base URL. Appending ``/domain`` unconditionally produced
+        invalid URLs such as ``.../com/v1/domain/domain/google.com``, which
+        registries answer with HTTP 400.
+
+        The segment is therefore only appended when the endpoint does not
+        already end with it.
+
+        Args:
+            endpoint: Configured RDAP endpoint URL
+            domain: Canonical domain name to look up
+
+        Returns:
+            The full RDAP domain lookup URL
+        """
+        parsed = urlparse(endpoint)
+        path = parsed.path.rstrip("/")
+
+        segments = [segment for segment in path.split("/") if segment]
+        if not segments or segments[-1].lower() != cls.DOMAIN_PATH_SEGMENT:
+            path = f"{path}/{cls.DOMAIN_PATH_SEGMENT}"
+
+        lookup_path = f"{path}/{quote(domain, safe='')}"
+        return urlunparse(parsed._replace(path=lookup_path))
+
     def _parse_response(self, json_data: dict) -> Optional[RDAPParsedFields]:
         """
         Parse RDAP response, extracting only defined fields.
@@ -203,12 +239,51 @@ class RDAPClient:
         except Exception:
             return None
 
+    @staticmethod
+    def _extract_rdap_error_code(body: str) -> Optional[int]:
+        """
+        Extract the ``errorCode`` from an RDAP error response body.
+
+        Args:
+            body: The raw response body
+
+        Returns:
+            The numeric ``errorCode``, or None if the body is not an RDAP
+            error object carrying a numeric ``errorCode``.
+        """
+        try:
+            data = json.loads(body)
+        except Exception:
+            return None
+
+        if not isinstance(data, dict):
+            return None
+
+        raw_code = data.get("errorCode")
+        if raw_code is None or isinstance(raw_code, bool):
+            return None
+
+        try:
+            return int(raw_code)
+        except (TypeError, ValueError):
+            return None
+
     def _is_not_found_response(self, response: httpx.Response) -> bool:
         """
         Check if a 404 response indicates domain not found.
 
         Requirement 2.2: HTTP 404 with defined "not found" response
         should map to potentially available.
+
+        RFC 7480 Section 5.3 defines HTTP 404 as the response for an object
+        that does not exist, and the accompanying RDAP error body is optional.
+        Registries such as Verisign answer with a 404 and an empty body, so
+        the status code itself is the defined signal. Requiring a textual
+        marker in the body classified those responses as errors, which the
+        decision engine then reported as "taken".
+
+        A 404 is only rejected when the body carries an RDAP error object
+        whose ``errorCode`` contradicts the HTTP status code.
 
         Args:
             response: The HTTP response to check
@@ -219,13 +294,28 @@ class RDAPClient:
         if response.status_code != 404:
             return False
 
-        # Check response body for "not found" indicators
         try:
-            text = response.text.lower()
-            return any(indicator in text for indicator in self.NOT_FOUND_INDICATORS)
+            body = response.text or ""
         except Exception:
-            # If we can't read the body, still treat 404 as not found
+            # If we can't read the body, the 404 status code still stands
             return True
+
+        body = body.strip()
+        if not body:
+            # Empty body: HTTP 404 is the defined "not found" signal
+            return True
+
+        lowered = body.lower()
+        if any(indicator in lowered for indicator in self.NOT_FOUND_INDICATORS):
+            return True
+
+        # An RDAP error object in the body must agree with the HTTP status
+        error_code = self._extract_rdap_error_code(body)
+        if error_code is not None:
+            return error_code == 404
+
+        # No contradicting error object -> the 404 status code is authoritative
+        return True
 
     def _is_valid_domain_object(self, json_data: dict) -> bool:
         """
@@ -310,7 +400,7 @@ class RDAPClient:
             )
 
         # Build RDAP URL
-        rdap_url = f"{endpoint.rstrip('/')}/domain/{domain}"
+        rdap_url = self._build_query_url(endpoint, domain)
 
         try:
             response = await self._client.get(
@@ -331,6 +421,27 @@ class RDAPClient:
                         error=None,
                         response_time_ms=response_time_ms,
                     )
+
+                # A 404 carrying a contradicting RDAP error object is not a
+                # usable "not found" signal. Report it as a parse error so the
+                # decision engine stays conservative, and do not retry it:
+                # retrying previously turned every unclassified 404 into four
+                # identical requests against the registry.
+                return RDAPResponse(
+                    status=RDAPStatus.ERROR,
+                    http_status_code=404,
+                    raw_response=None,
+                    parsed_fields=None,
+                    error=RDAPError(
+                        code=RDAPErrorCode.PARSE_ERROR,
+                        message=(
+                            "HTTP 404 response is not a valid RDAP "
+                            "'not found' response"
+                        ),
+                        http_status_code=404,
+                    ),
+                    response_time_ms=response_time_ms,
+                )
 
             # Handle rate limiting
             if response.status_code == 429:

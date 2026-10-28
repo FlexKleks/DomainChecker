@@ -51,16 +51,21 @@ class WHOISClient:
     # Defined "no match" signals per TLD
     # These are the ONLY signals that indicate a domain is available
     # Any response not containing these exact signals is treated as ambiguous
+    #
+    # The signals must match the wording the registries actually emit.
+    # Several entries previously never matched (Verisign answers
+    # 'No match for "EXAMPLE.COM".', not "No match for domain"), so available
+    # domains were classified AMBIGUOUS and therefore reported as taken.
     NO_MATCH_SIGNALS: dict[str, list[str]] = {
         "de": ["Status: free"],
-        "com": ["No match for domain"],
-        "net": ["No match for domain"],
-        "org": ["NOT FOUND"],
+        "com": ["No match for"],
+        "net": ["No match for"],
+        "org": ["Domain not found."],
         "eu": ["Status: AVAILABLE"],
-        "io": ["NOT FOUND"],
+        "io": ["Domain not found."],
         "co": ["No Data Found"],
-        "info": ["NOT FOUND"],
-        "biz": ["Not found:"],
+        "info": ["Domain not found.", "NOT FOUND"],
+        "biz": ["No Data Found"],
     }
 
     # Default WHOIS servers per TLD

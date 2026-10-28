@@ -23,7 +23,7 @@ What actually happened.
 ## Environment
 - OS: [e.g., Windows 11, Ubuntu 22.04]
 - Python version: [e.g., 3.11.5]
-- Package version: [e.g., 0.1.0]
+- Package version: [e.g., 0.2.1]
 
 ## Configuration
 ```json
